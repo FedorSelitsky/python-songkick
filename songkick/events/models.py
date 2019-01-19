@@ -38,7 +38,7 @@ class SongkickArtistInEvent(SongkickModel):
     on_tour_until = fields.Field(mapping='onTourUntil')
 
     def __repr__(self):
-        return self.display_name.encode('utf-8')
+        return self.display_name
 
 
 class SongkickEventDate(SongkickModel):
@@ -98,7 +98,7 @@ class SongkickCity(SongkickModel):
     uri = fields.Field()
 
     def __repr__(self):
-        return self.display_name.encode('utf-8')
+        return self.display_name
 
 
 class SongkickVenue(SongkickModel):
@@ -137,7 +137,7 @@ class SongkickVenue(SongkickModel):
     uri = fields.Field()
 
     def __repr__(self):
-        return self.display_name.encode('utf-8')
+        return self.display_name
 
 
 class SongkickEventSeries(SongkickModel):
@@ -185,8 +185,7 @@ class SongkickEvent(SongkickModel):
     uri = fields.Field()
     
     def __repr__(self):
-        return self.display_name.encode('utf-8')
+        return self.display_name
 
     def is_active(self):
         return bool(self.status == 'ok')
-

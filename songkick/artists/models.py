@@ -18,4 +18,4 @@ class SongkickArtist(SongkickModel):
     on_tour_until = fields.Field(mapping='onTourUntil')
 
     def __repr__(self):
-        return self.display_name.encode('utf-8')
+        return self.display_name

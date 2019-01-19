@@ -16,7 +16,7 @@ class StringField(BaseField):
     def to_python(self, value):
         if not isinstance(value, str):
             value = str(value)
-        return value.encode('utf-8')
+        return value
 
 
 class BooleanField(Field):
@@ -31,6 +31,7 @@ class IntField(Field):
         if not isinstance(value, int):
             value = int(value)
         return value
+
 
 class DecimalField(Field):
 
