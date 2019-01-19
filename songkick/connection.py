@@ -107,7 +107,7 @@ class SongkickConnection(object):
 
     # Locations
     @property
-    def artists_similar(self):
+    def locations_search(self):
         return LocationQuery(self)
 
     # Deprecated
