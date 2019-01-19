@@ -4,7 +4,7 @@ class SongkickModelOptions(object):
     def __new__(cls, meta=None):
         overrides = {}
         if meta is not None:
-            for key, value in meta.iteritems():
+            for key, value in list(meta.items()):
                 if key.startswith('_'):
                     continue
                 overrides[key] = value
@@ -27,7 +27,7 @@ class SongkickModelMetaclass(type):
 
         fields = {}
 
-        for key, value in attrs.iteritems():
+        for key, value in list(attrs.items()):
             if isinstance(value, BaseField):
                 value.field_name = key
                 if value.mapping is None:
@@ -39,13 +39,11 @@ class SongkickModelMetaclass(type):
         return new_cls
 
 
-class SongkickModel(object):
-    __metaclass__ = SongkickModelMetaclass    
-
+class SongkickModel(object, metaclass=SongkickModelMetaclass):
     def __init__(self, **values):
         self._data = {}
 
-        for field_name in self._fields.keys():
+        for field_name in list(self._fields.keys()):
             try:
                 setattr(self, field_name, values.pop(field_name))
             except AttributeError:
@@ -58,7 +56,7 @@ class SongkickModel(object):
 
         values = {}
 
-        for field_name, field in cls._fields.items():
+        for field_name, field in list(cls._fields.items()):
 
             # start with nothing
             value = None

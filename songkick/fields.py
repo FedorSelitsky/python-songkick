@@ -14,7 +14,7 @@ class Field(BaseField):
 class StringField(BaseField):
 
     def to_python(self, value):
-        if not isinstance(value, basestring):
+        if not isinstance(value, str):
             value = str(value)
         return value.encode('utf-8')
 
