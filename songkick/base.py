@@ -1,3 +1,25 @@
+class BaseField(object):
+
+    def __init__(self, field_name=None, mapping=None, default=None):
+        """Set up a Songkick field responsible for storing
+        and translating JSON data into something useful.
+        """
+
+        self.field_name = field_name
+        self.mapping = mapping or field_name
+        self.default = default
+
+    def __get__(self, instance, owner):
+        value = instance._data.get(self.field_name)
+        if value is None:
+            # try a default
+            return self.default
+        return value
+
+    def __set__(self, instance, value):
+        instance._data[self.field_name] = value
+
+
 class SongkickModelOptions(object):
     fields = None
 
@@ -79,25 +101,3 @@ class SongkickModel(object, metaclass=SongkickModelMetaclass):
             values[field_name] = value
 
         return cls(**values)
-
-
-class BaseField(object):
-
-    def __init__(self, field_name=None, mapping=None, default=None):
-        """Set up a Songkick field responsible for storing
-        and translating JSON data into something useful.
-        """
-
-        self.field_name = field_name
-        self.mapping = mapping or field_name
-        self.default = default
-
-    def __get__(self, instance, owner):
-        value = instance._data.get(self.field_name)
-        if value is None:
-            # try a default
-            return self.default
-        return value
-
-    def __set__(self, instance, value):
-        instance._data[self.field_name] = value
