@@ -86,7 +86,7 @@ class SongkickModel(object, metaclass=SongkickModelMetaclass):
             if '__' in field.mapping:
                 bits = field.mapping.split('__')
                 first_bit = bits.pop(0)
-                value = data[first_bit]
+                value = data.get(first_bit, {})
 
                 while bits:
                     bit = bits.pop(0)
