@@ -75,11 +75,13 @@ class SongkickMetroArea(SongkickModel):
 
     :param id: Songkick id
     :param display_name: Metro area name
+    :param state: State name
     :param country: Country name
     """
 
     id = fields.Field()
     display_name = fields.Field(mapping='displayName')
+    state = fields.Field(mapping='state__displayName')
     country = fields.Field(mapping='country__displayName')
 
 
